@@ -136,7 +136,7 @@ function openCell(x, y) {
     cell.el.textContent = "💣";
     clearInterval(timerInterval);
     setTimeout(() => {
-      alert("💥 Ви програли!");
+      alert("💥 you lost!");
       location.reload();
     }, 1000);
     return;
@@ -189,6 +189,6 @@ function checkWin() {
   const unopened = board.flat().filter(c => !c.open && !c.mine);
   if (unopened.length === 0) {
     clearInterval(timerInterval);
-    setTimeout(() => alert(`🎉 Перемога за ${timer} секунд!`), 300);
+    setTimeout(() => alert(`🎉 Victory in ${timer} seconds!`), 300);
   }
 }
