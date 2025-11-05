@@ -9,7 +9,7 @@ const boardEl = document.getElementById("game-board");
 const timerEl = document.getElementById("timer");
 const backBtn = document.getElementById("back-btn");
 
-// === ТЕМА ===
+
 const toggleBtn = document.getElementById("theme-toggle");
 const savedTheme = localStorage.getItem("theme") || "light";
 document.documentElement.setAttribute("data-theme", savedTheme);
@@ -21,13 +21,13 @@ toggleBtn.addEventListener("click", () => {
 
 backBtn.onclick = () => window.location.href = "index.html";
 
-// === ІНІЦІАЛІЗАЦІЯ ===
+
 function initBoard() {
   boardEl.setAttribute("data-size", size);
   boardEl.innerHTML = "";
   board = [];
 
-  // 🧩 Универсально: создаём сетку любого размера
+  
   let cellSize = 30;
   if (size === 8) cellSize = 65;
   else if (size === 16) cellSize = 40;
@@ -50,16 +50,16 @@ function initBoard() {
   }
 }
 
-initBoard(); // <== Не забудь вызывать после определения функции
+initBoard(); 
 
-// === СТВОРЕННЯ МІН ===
+
 function placeMines(firstX, firstY) {
   let placed = 0;
   while (placed < mineCount) {
     let x = Math.floor(Math.random() * size);
     let y = Math.floor(Math.random() * size);
 
-    // уникаємо області навколо першого кліку
+   
     if (Math.abs(x - firstX) <= 1 && Math.abs(y - firstY) <= 1) continue;
 
     if (!board[y][x].mine) {
@@ -76,7 +76,7 @@ function placeMines(firstX, firstY) {
   }
 }
 
-// === СУСІДИ ===
+
 function getNeighbors(x, y) {
   const n = [];
   for (let dy = -1; dy <= 1; dy++) {
@@ -89,7 +89,7 @@ function getNeighbors(x, y) {
   return n;
 }
 
-// === КЛІК ===
+
 function handleClick(e) {
   const x = +this.dataset.x;
   const y = +this.dataset.y;
@@ -102,7 +102,7 @@ function handleClick(e) {
       timerEl.textContent = `⏱ ${timer} c`;
     }, 1000);
 
-    // Відкриваємо область навколо першого кліку
+    
     floodReveal(x, y);
     return;
   }
@@ -110,7 +110,7 @@ function handleClick(e) {
   openCell(x, y);
 }
 
-// === ПОСТАВИТИ ПРАПОР ===
+
 function handleFlag(e) {
   e.preventDefault();
   const x = +this.dataset.x;
@@ -122,7 +122,7 @@ function handleFlag(e) {
   cell.el.textContent = cell.flag ? "🚩" : "";
 }
 
-// === ВІДКРИТТЯ КЛІТИНОК ===
+
 function openCell(x, y) {
   const cell = board[y][x];
   if (cell.open || cell.flag) return;
@@ -151,7 +151,7 @@ function openCell(x, y) {
   checkWin();
 }
 
-// === РОЗКРИТТЯ ОБЛАСТІ ===
+
 function floodReveal(x, y) {
   const queue = [[x, y]];
   const visited = new Set();
@@ -174,7 +174,7 @@ function floodReveal(x, y) {
   }
 }
 
-// === ПОКАЗАТИ ВСІ МІНИ ===
+
 function showAllMines() {
   board.flat().forEach(c => {
     if (c.mine) {
@@ -184,7 +184,7 @@ function showAllMines() {
   });
 }
 
-// === ПЕРЕМОГА ===
+
 function checkWin() {
   const unopened = board.flat().filter(c => !c.open && !c.mine);
   if (unopened.length === 0) {
