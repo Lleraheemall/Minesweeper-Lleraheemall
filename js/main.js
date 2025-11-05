@@ -1,4 +1,4 @@
-﻿// Зміна теми
+
 document.addEventListener("DOMContentLoaded", () => {
   const toggleBtn = document.getElementById("theme-toggle");
   const savedTheme = localStorage.getItem("theme") || "light";
