@@ -19,3 +19,4 @@ The game automatically opens an area on the first click and allows flag placemen
 - Flag system (right-click)
 - Restart after losing
 - Responsive layout for desktop and mobile
+https://lleraheemall.github.io/Minesweeper-Lleraheemall/
